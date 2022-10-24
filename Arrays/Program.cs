@@ -9,11 +9,11 @@ namespace Arrays
     internal class Program
     {
 
-        static string[] weaponList = new string[] {"Revolver", "Shot Gun", "Rifle", "Spray n' Pray" };
-        static int[] maxAmmos = new int[]{6, 2, 10, 50};
+        static string[] weaponList = new string[] {"Revolver", "Shot Gun", "Rifle"};
+        static int[] maxAmmos = new int[]{6, 2, 10};
 
-        static int CurrentWeapon = 1;
-        static int CurrentAmmo = 6;
+        static int currentWeapon = 1;
+        static int currentAmmo = 6;
 
         static void Main(string[] args)
         {
@@ -26,10 +26,32 @@ namespace Arrays
 
         static void ShowHud()
         {
-            Console.Clear();
             Console.WriteLine("----------");
             Console.WriteLine();
-            Console.WriteLine("Current Weapon: " + weaponList[CurrentWeapon]);
+            Console.WriteLine("Current Weapon: " + weaponList[currentWeapon]);
+            Console.WriteLine("Current Ammo:" + currentAmmo + "/" + maxAmmos[currentWeapon]);
+            Console.WriteLine("----------");
+            Console.WriteLine();
+        }
+
+        static void Fire()
+        {
+            if(currentAmmo > 0)
+            {
+                currentAmmo--;
+                Console.WriteLine("BANG!");
+            }
+            else
+            {
+                currentAmmo = 0;
+                Console.WriteLine("click");
+            }
+            ShowHud();
+        }
+
+        static void Reload()
+        {
+            currentAmmo = maxAmmos[currentWeapon];
         }
 
     }
