@@ -9,17 +9,19 @@ namespace Arrays
     internal class Program
     {
 
-        static string[] weaponList = new string[] {"Revolver", "Shot Gun", "Rifle"};
-        static int[] maxAmmos = new int[]{6, 2, 10};
+        static string[] weaponList = new string[] { "Revolver", "Shot Gun", "Rifle" };
+        static int[] maxAmmos = new int[] { 6, 2, 10 };
+        static int[] currentAmmos = new int[]{6, 2, 10};
+        static int[] BackUpAmmos = new int[] { 12, 4, 20 };
 
         static int currentWeapon = 0;
-        static int currentAmmo = 6;
 
         static void Main(string[] args)
         {
             ShowHud();
             Fire();
             Fire();
+            Reload();
             Fire();
             Fire();
             Fire();
@@ -31,7 +33,20 @@ namespace Arrays
             Fire();
             Fire();
             Reload();
-
+            Fire();
+            Fire();
+            Reload();
+            Fire();
+            Fire();
+            Reload();
+            FindAmmo();
+            Reload();
+            Fire();
+            SwitchWeapon(2);
+            Fire();
+            Fire();
+            SwitchWeapon(1);    //Shotgun now empty
+            Fire();
         }
 
         static void ShowHud()
@@ -40,7 +55,8 @@ namespace Arrays
             Console.WriteLine("----------");
             Console.WriteLine();
             Console.WriteLine("Current Weapon: " + weaponList[currentWeapon]);
-            Console.WriteLine("Current Ammo:" + currentAmmo + "/" + maxAmmos[currentWeapon]);
+            Console.WriteLine("Current Ammo: " + currentAmmos[currentWeapon] + "/" + maxAmmos[currentWeapon]);
+            Console.WriteLine("Stored Ammo: " + BackUpAmmos[currentWeapon]);
             Console.WriteLine();
             Console.WriteLine("----------");
             Console.WriteLine();
@@ -49,14 +65,14 @@ namespace Arrays
 
         static void Fire()
         {
-            if(currentAmmo > 0)
+            if (currentAmmos[currentWeapon] > 0)
             {
-                currentAmmo--;
+                currentAmmos[currentWeapon]--;
                 Console.WriteLine("BANG!");
             }
             else
             {
-                currentAmmo = 0;
+                currentAmmos[currentWeapon] = 0;
                 Console.WriteLine("click");
             }
             ShowHud();
@@ -64,16 +80,35 @@ namespace Arrays
 
         static void Reload()
         {
-            Console.WriteLine("Reloading!");
-            currentAmmo = maxAmmos[currentWeapon];
+            if (BackUpAmmos[currentWeapon] >= maxAmmos[currentWeapon])
+            {
+                Console.WriteLine("Reloading!");
+                BackUpAmmos[currentWeapon] -= (maxAmmos[currentWeapon] - currentAmmos[currentWeapon]);
+                currentAmmos[currentWeapon] = maxAmmos[currentWeapon];
+            }else if (BackUpAmmos[currentWeapon] > 0)
+            {
+                Console.WriteLine("Reloading!");
+                currentAmmos[currentWeapon] = BackUpAmmos[currentWeapon];
+                BackUpAmmos[currentWeapon] = 0;
+            }
+            else
+            {
+                Console.WriteLine("No Stored Ammo");
+            }
             ShowHud();
         }
 
         static void SwitchWeapon(int switchTo)
         {
             currentWeapon = switchTo;
-            currentAmmo = maxAmmos[switchTo];
             Console.WriteLine("Switching to " + weaponList[currentWeapon] + "!");
+            ShowHud();
+        }
+
+        static void FindAmmo()
+        {
+            BackUpAmmos[currentWeapon] += maxAmmos[currentWeapon];
+            Console.WriteLine("Found Ammo!");
             ShowHud();
         }
 
