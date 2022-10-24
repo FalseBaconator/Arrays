@@ -12,26 +12,39 @@ namespace Arrays
         static string[] weaponList = new string[] {"Revolver", "Shot Gun", "Rifle"};
         static int[] maxAmmos = new int[]{6, 2, 10};
 
-        static int currentWeapon = 1;
+        static int currentWeapon = 0;
         static int currentAmmo = 6;
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Arrays:");
-            Console.WriteLine();
-
-            Console.ReadKey(true);
+            ShowHud();
+            Fire();
+            Fire();
+            Fire();
+            Fire();
+            Fire();
+            Fire();
+            Fire();
+            Reload();
+            SwitchWeapon(1);
+            Fire();
+            Fire();
+            Fire();
+            Reload();
 
         }
 
         static void ShowHud()
         {
+            Console.WriteLine();
             Console.WriteLine("----------");
             Console.WriteLine();
             Console.WriteLine("Current Weapon: " + weaponList[currentWeapon]);
             Console.WriteLine("Current Ammo:" + currentAmmo + "/" + maxAmmos[currentWeapon]);
+            Console.WriteLine();
             Console.WriteLine("----------");
             Console.WriteLine();
+            Console.ReadKey(true);
         }
 
         static void Fire()
@@ -51,7 +64,17 @@ namespace Arrays
 
         static void Reload()
         {
+            Console.WriteLine("Reloading!");
             currentAmmo = maxAmmos[currentWeapon];
+            ShowHud();
+        }
+
+        static void SwitchWeapon(int switchTo)
+        {
+            currentWeapon = switchTo;
+            currentAmmo = maxAmmos[switchTo];
+            Console.WriteLine("Switching to " + weaponList[currentWeapon] + "!");
+            ShowHud();
         }
 
     }
