@@ -8,11 +8,11 @@ namespace Arrays
 {
     internal class Program
     {
-
-        static string[] weaponList = new string[] { "Revolver", "Shot Gun", "Rifle" };
-        static int[] maxAmmos = new int[] { 6, 2, 10 };
-        static int[] currentAmmos = new int[]{6, 2, 10};
-        static int[] BackUpAmmos = new int[] { 12, 4, 20 };
+        //                                              0           1           2       3
+        static string[] weaponList = new string[] { "Revolver", "Shot Gun", "Rifle", "Flintlock"};
+        static int[] maxAmmos = new int[] {6, 2, 10, 1};
+        static int[] currentAmmos = new int[]{6, 2, 10, 1};
+        static int[] BackUpAmmos = new int[] {12, 4, 20, 5};
 
         static int currentWeapon = 0;
 
@@ -22,6 +22,8 @@ namespace Arrays
             Fire();
             Fire();
             Reload();
+            Fire();
+            Fire();
             Fire();
             Fire();
             Fire();
@@ -45,8 +47,28 @@ namespace Arrays
             SwitchWeapon(2);
             Fire();
             Fire();
-            SwitchWeapon(1);    //Shotgun now empty
+            SwitchWeapon(1);
+            Fire();             //Shotgun now empty
+            SwitchWeapon(2);
             Fire();
+            Fire();
+            Fire();
+            Fire();
+            Fire();
+            Fire();
+            Fire();
+            Fire();
+            Fire();
+            Reload();
+            SwitchWeapon(3);
+            Fire();
+            Reload();
+            Fire();
+            Reload();
+            Fire();
+            Reload();
+            Fire();
+            Reload();
         }
 
         static void ShowHud()
